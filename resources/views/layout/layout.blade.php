@@ -16,6 +16,9 @@
         <!-- Icon Font Stylesheet -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
         <link href="{{ asset('import/assets/lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
@@ -27,6 +30,8 @@
 
         <!-- Template Stylesheet -->
         <link href="  {{ asset ('import/assets/css/style.css') }}" rel="stylesheet">
+
+        
     </head>
 
     <body>
@@ -62,7 +67,6 @@
 
         {{-- Page content goes here --}}
         @yield('content')
-
 
                <!-- Footer Start -->
             <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
@@ -154,9 +158,7 @@
                 </div>
             </div>
             <!-- Copyright End -->
-    
-    
-    
+
             <!-- Back to Top -->
             <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
     
