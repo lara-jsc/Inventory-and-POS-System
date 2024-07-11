@@ -12,11 +12,11 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'category-id',
-        'quantity',
-        'refill-price',
-        'retail-price',
-        'seller-price'   
-
+        'category_id',
+        'qty',
+        'refill_price',
+        'retail_price',
+        'seller_refill_price',
+        'seller_retail_price'
     ];
 }

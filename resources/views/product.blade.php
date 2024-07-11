@@ -16,7 +16,7 @@
             <div class="container py-2">
                     <!-- Add button -->
                 <button class="btn btn-md bg-light border mt-4">
-                    <a href=""><i class="fa fa-plus"></i> Add</a>
+                    <a href="{{Route('create')}}"><i class="fa fa-plus"></i> Add</a>
                 </button>
             
                 <div class="table-responsive">

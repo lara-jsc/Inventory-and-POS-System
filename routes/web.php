@@ -6,7 +6,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -22,5 +21,10 @@ Route::get('/cart', [CartController::class , 'cartView'])-> name('cart');
 
 Route::get('/product', [ProductController::class , 'productView'])-> name('product'); 
 
-Route::get('/create', [ProductController::class , 'create'])-> name('create'); 
+Route::get('/create', [ProductController::class , 'createView'])-> name('create'); 
+
+Route::post('/product', [ProductController::class , 'store'])-> name('product.store'); 
+
+Route::get('/categories', [ProductController::class , 'categoriesView'])-> name('categories'); 
+
 
