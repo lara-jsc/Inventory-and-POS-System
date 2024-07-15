@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -12,11 +15,16 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'category_id',
-        'qty',
-        'refill_price',
-        'retail_price',
-        'seller_refill_price',
-        'seller_retail_price'
+        'category_id'
     ];
+
+    public function price():HasOne
+    {
+        return $this->hasOne(Price::class);
+    }
+    
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

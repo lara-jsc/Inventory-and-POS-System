@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Price;
+
 
 class ProductController extends Controller
 {
-    //
+    
     public function productView(){
-        return view('product');
+        $products = Product::with('category', 'price')->get();
+        return view('product', 
+            compact('products')
+        );
     }
 
     public function createView(){
@@ -24,15 +29,26 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'nullable',
             'category_id' => 'required|numeric',
+            'price_type' => 'required|string',
+            'unit_size' => 'required|string',
             'qty' => 'required|numeric',
-            'refill_price' => 'required|decimal:0,2',
-            'retail_price' => 'required|decimal:0,2',
-            'seller_refill_price' => 'required|decimal:0,2',
-            'seller_retail_price' => 'required|decimal:0,2'
+            'price' => 'required|numeric|min:0',
         ]);
 
-        $newProduct = Product::create($data);
-        return redirect(route('product'));
+        $newProduct = Product::create([
+            'name' => $data['name'],
+            'category_id' => $data['category_id'],
+            'description' => $data['description'],
+        ]);
+
+        $newProduct->price()->create([
+            'price_type' => $data['price_type'],
+            'unit_size' => $data['unit_size'],
+            'qty' => $data['qty'],
+            'price' => $data['price'],
+        ]);
+
+        return redirect()->route('product')->with('success', 'Product added successfully.');
     }
 
     public function categoriesView(){
@@ -47,5 +63,44 @@ class ProductController extends Controller
 
         $newCategories = Category::create($data);
         return redirect(route('product'));
+    }
+
+    public function edit(Product $product){
+        return view('modal.edit' , ['product' => $product]);
+    }
+
+    public function update(Product $product, Request $request){
+             
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'category_id' => 'required|numeric',
+            'price_type' => 'required|string',
+            'unit_size' => 'required|string',
+            'qty' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+
+        $product->update([
+            'name' => $data['name'],
+            'category_id' => $data['category_id'],
+            'description' => $data['description'],
+        ]);
+
+        $product->price()->update([
+            'price_type' => $data['price_type'],
+            'unit_size' => $data['unit_size'],
+            'qty' => $data['qty'],
+            'price' => $data['price'],
+        ]); 
+
+        return redirect()->route('product')->with('success', 'Product Update successfully.');
+    }
+
+    public function delete(Product $product){
+        $product->delete();
+        
+        return redirect()->route('product')->with('success', 'Product Delete successfully.');
     }
 }

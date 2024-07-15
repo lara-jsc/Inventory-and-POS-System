@@ -16,12 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->integer('qty');
-            $table->decimal('refill_price', 8, 2);
-            $table->decimal('retail_price', 8, 2); 
-            $table->decimal('seller_refill_price', 8, 2); 
-            $table->decimal('seller_retail_price', 8, 2); 
-            
             $table->timestamps();
         });
     }

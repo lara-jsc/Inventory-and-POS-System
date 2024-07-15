@@ -14,15 +14,17 @@
     </div>
     <!-- Main Content -->
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Add Product</h2>
-        <form method="post" action="{{route('product.store')}}">
+        <h2 class="text-center mb-4">Edit Product</h2>
+        <form method="post" action="{{ route('product.update', ['product' => $product->id]) }}">
+
             @csrf
-            @method('post')
+            @method('put')
+
             <!-- Product Name -->
             <div class="form-group row">
                 <label for="product-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control form-control-sm mb-3" name="name" placeholder="Enter product name">
+                    <input type="text" class="form-control form-control-sm mb-3" name="name" value="{{$product->name}}" placeholder="Enter product name">
                 </div>
             </div>
 
@@ -30,7 +32,7 @@
             <div class="form-group row">
                 <label for="description" class="col-sm-3 col-form-label col-form-label-sm">Description</label>
                 <div class="col-sm-9">
-                    <textarea class="form-control form-control-sm mb-3" name="description" placeholder="Enter product description" rows="3"></textarea>
+                    <textarea class="form-control form-control-sm mb-3" name="description" placeholder="Enter product description" rows="3">{{$product->description}}</textarea>
                 </div>
             </div>
 
@@ -40,13 +42,12 @@
                 <div class="col-sm-9">
                     <select class="form-control form-control-sm mb-3" name="category_id">
                         <option value="">Select a category</option>
-                        <option value="1">Dishwashing</option>
-                        <option value="2">Laundry</option>
-                        <option value="3">Car</option>
-                        <option value="4">Pet</option>
-                        <option value="5">Others</option>
-                        <option value="6">Cleaner</option>
-
+                        <option value="1" {{ $product->category_id == 1 ? 'selected' : '' }}>Dishwashing</option>
+                        <option value="2" {{ $product->category_id == 2 ? 'selected' : '' }}>Laundry</option>
+                        <option value="3" {{ $product->category_id == 3 ? 'selected' : '' }}>Car</option>
+                        <option value="4" {{ $product->category_id == 4 ? 'selected' : '' }}>Pet</option>
+                        <option value="5" {{ $product->category_id == 5 ? 'selected' : '' }}>Others</option>
+                        <option value="6" {{ $product->category_id == 6 ? 'selected' : '' }}>Cleaner</option>
                     </select>
                 </div>
             </div>
@@ -56,9 +57,9 @@
                 <div class="col-sm-9">
                     <select class="form-control form-control-sm mb-3" name="price_type">
                         <option value="">Select a price type</option>
-                        <option value="refill">Refill</option>
-                        <option value="retail">Retail</option>
-                        <option value="seller">Seller</option>
+                        <option value="refill" {{ $product->price->price_type === 'refill' ? 'selected' : '' }}>Refill</option>
+                        <option value="retail" {{ $product->price->price_type === 'retail' ? 'selected' : '' }}>Retail</option>
+                        <option value="seller" {{ $product->price->price_type === 'seller' ? 'selected' : '' }}>Seller</option>
                     </select>
                 </div>
             </div>
@@ -68,9 +69,9 @@
                 <div class="col-sm-9">
                     <select class="form-control form-control-sm mb-3" name="unit_size">
                         <option value="">Select a unit size</option>
-                        <option value="liter">Liter</option>
-                        <option value="gallon">Gallon</option>
-                        <option value="drum">Drum</option>
+                        <option value="liter"  {{$product->price->unit_size === 'liter' ? 'selected' : ''}}>Liter</option>
+                        <option value="gallon" {{$product->price->unit_size === 'gallon' ? 'selected' : ''}}>Gallon</option>
+                        <option value="drum"   {{$product->price->unit_size === 'drum' ? 'selected' : ''}}>Drum</option>
                     </select>
                 </div>
             </div>
@@ -79,7 +80,7 @@
             <div class="form-group row">
                 <label for="description" class="col-sm-3 col-form-label col-form-label-sm">Quantity</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control form-control-sm mb-3" name="qty" placeholder="Enter quantity">
+                    <input type="text" class="form-control form-control-sm mb-3" name="qty" value="{{$product->price->qty}}" placeholder="Enter quantity">
                 </div>
             </div>
 
@@ -87,14 +88,14 @@
             <div class="form-group row">
                 <label for="refill-price" class="col-sm-3 col-form-label col-form-label-sm">Price</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control form-control-sm mb-3" name="price" placeholder="Enter refill price">
+                    <input type="text" class="form-control form-control-sm mb-3" name="price" value="{{$product->price->price}}" placeholder="Enter refill price">
                 </div>
             </div>
 
             <!-- Submit Button -->
             <div class="form-group row">
                 <div class="col-sm-9 offset-sm-3">
-                    <button type="submit" class="btn btn-primary btn-sm mb-3">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-sm mb-3">Update</button>
                 </div>
             </div>
         </form>
