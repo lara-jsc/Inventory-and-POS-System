@@ -56,9 +56,9 @@
                 <div class="col-sm-9">
                     <select class="form-control form-control-sm mb-3" name="price_type">
                         <option value="">Select a price type</option>
-                        <option value="refill">Refill</option>
-                        <option value="retail">Retail</option>
-                        <option value="seller">Seller</option>
+                        <option value="Refill">Refill</option>
+                        <option value="Retail">Retail</option>
+                        <option value="Seller">Seller</option>
                     </select>
                 </div>
             </div>
@@ -68,9 +68,9 @@
                 <div class="col-sm-9">
                     <select class="form-control form-control-sm mb-3" name="unit_size">
                         <option value="">Select a unit size</option>
-                        <option value="liter">Liter</option>
-                        <option value="gallon">Gallon</option>
-                        <option value="drum">Drum</option>
+                        <option value="Liter">Liter</option>
+                        <option value="Gallon">Gallon</option>
+                        <option value="Drum">Drum</option>
                     </select>
                 </div>
             </div>

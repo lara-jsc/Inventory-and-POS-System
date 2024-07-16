@@ -27,8 +27,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <a href="{{ route('categories') }}" class="dropdown-item">Category</a>
                                     <a href="{{ route('cart') }}" class="dropdown-item">Cart</a>
-                                    <a href="chackout.html" class="dropdown-item">Chackout</a>
                                     <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                                     <a href="404.html" class="dropdown-item">404 Page</a>
                                 </div>

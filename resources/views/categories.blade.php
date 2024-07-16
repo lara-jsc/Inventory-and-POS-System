@@ -11,15 +11,15 @@
     </div>
     <!-- Main Content -->
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Add Product</h2>
-        <form method="post" action="{{route('product.store')}}">
+        <h2 class="text-center mb-4">Add Category</h2>
+        <form method="post" action="{{route('category')}}">
             @csrf
             @method('post')
             <!-- Product Name -->
             <div class="form-group row">
                 <label for="product-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control form-control-sm mb-3" name="name" placeholder="Enter Categories name">
+                    <input type="text" class="form-control form-control-sm mb-3" name="name" placeholder="Enter Category name">
                 </div>
             </div>
 

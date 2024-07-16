@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -27,12 +29,15 @@ Route::post('/product', [ProductController::class , 'store'])-> name('product.st
 
 Route::get('/categories', [ProductController::class , 'categoriesView'])-> name('categories'); 
 
-Route::get('/product/{product}/edit', [ProductController::class , 'edit'])-> name('product.edit'); 
+Route::get('/edit/{product}', [ProductController::class , 'edit'])-> name('product.edit'); 
 
-Route::put('/product/{product}/update', [ProductController::class , 'update'])-> name('product.update'); 
+Route::put('/update/{product}', [ProductController::class , 'update'])-> name('product.update'); 
 
-Route::delete('/product/{product}/delete', [ProductController::class , 'delete'])-> name('product.delete'); 
+Route::delete('/delete/{product}', [ProductController::class , 'delete'])-> name('product.delete'); 
 
+Route::get('/sales', [SalesController::class , 'salesView'])-> name('sales'); 
+
+Route::post('/categories', [CategoryController::class , 'add'])-> name('category'); 
 
 
 

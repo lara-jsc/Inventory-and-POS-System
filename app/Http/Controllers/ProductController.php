@@ -11,11 +11,17 @@ use App\Models\Price;
 class ProductController extends Controller
 {
     
-    public function productView(){
-        $products = Product::with('category', 'price')->get();
-        return view('product', 
-            compact('products')
-        );
+    public function productView(Request $request){
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $products = Product::with('category', 'price')
+                ->where('name', 'like', '%' . $searchTerm . '%')
+                ->get();
+        } else {
+            $products = Product::with('category', 'price')->get();
+        }
+    
+        return view('product', compact('products'));
     }
 
     public function createView(){
@@ -55,22 +61,15 @@ class ProductController extends Controller
         return view('categories');
     }
 
-    public function add(Request $request){
-
-        $data = $request->validate([
-            'name' => 'required'
-        ]);
-
-        $newCategories = Category::create($data);
-        return redirect(route('product'));
-    }
-
     public function edit(Product $product){
-        return view('modal.edit' , ['product' => $product]);
+        $categories = Category::all(); 
+        $prices = Price::all();
+        return view('modal.edit' , ['product' => $product, 'categories' => $categories,'prices' => $prices ]);
     }
 
     public function update(Product $product, Request $request){
-             
+ 
+
         $data = $request->validate([
             'name' => 'required',
             'description' => 'nullable',
@@ -80,7 +79,6 @@ class ProductController extends Controller
             'qty' => 'required|numeric',
             'price' => 'required|numeric|min:0',
         ]);
-
 
         $product->update([
             'name' => $data['name'],
@@ -94,7 +92,7 @@ class ProductController extends Controller
             'qty' => $data['qty'],
             'price' => $data['price'],
         ]); 
-
+     
         return redirect()->route('product')->with('success', 'Product Update successfully.');
     }
 
@@ -102,5 +100,9 @@ class ProductController extends Controller
         $product->delete();
         
         return redirect()->route('product')->with('success', 'Product Delete successfully.');
+    }
+
+    public function search(){
+        
     }
 }
